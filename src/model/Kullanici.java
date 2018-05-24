@@ -180,9 +180,7 @@ public class Kullanici {
             veritabani_baglanti vb=new veritabani_baglanti();
             vb.baglan();
             
-              //String sorgu="insert into kullanici_tablo (tc_no,ad,soyad,k_adi,sifre,sehir,birim,dogum_tarihi,cinsiyet)"
-                //    + "VALUES(?,?,?,?,?,?,?,?,?)";
-            
+             
             //UPDATE uyeler SET yas = 40, email = "ali@yenimail.com" WHERE id = "1";
             String sorgu=("update kullanici_tablo SET ad=?,soyad=?,k_adi=?,sifre=?,sehir=?,birim=?,dogum_tarihi=?,cinsiyet=?"
                     + "where k_adi=?");

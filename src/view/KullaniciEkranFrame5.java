@@ -5,7 +5,15 @@
  */
 package view;
 
+
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.IzinIstek;
 import model.Kullanici;
 
 /**
@@ -52,8 +60,6 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         KullaniciEkranIzinIstegiYapDialog = new javax.swing.JDialog();
-        kullaniciEkranIzinisteTctxt = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         kullaniciEkranIzinistebaslangicAy = new javax.swing.JComboBox<>();
@@ -63,6 +69,9 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
         kullaniciEkranIzinistebitisGun = new javax.swing.JComboBox<>();
         kullaniciEkranIzinistebitisYil = new javax.swing.JComboBox<>();
         kullaniciEkranIzinisteIstekGonderButon = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        izinIstekBaslangicDateChooser = new com.toedter.calendar.JCalendar();
+        izinIstekBitisDateChooser = new com.toedter.calendar.JCalendar();
         kullaniciEkranIzinisteklerimDialog = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         kullaniciEkranIzinisteklerimDialogTablo = new javax.swing.JTable();
@@ -108,10 +117,8 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
 
         jMenu3.setText("jMenu3");
 
-        KullaniciEkranIzinIstegiYapDialog.setMinimumSize(new java.awt.Dimension(457, 374));
-        KullaniciEkranIzinIstegiYapDialog.setPreferredSize(new java.awt.Dimension(457, 374));
-
-        jLabel11.setText("TC");
+        KullaniciEkranIzinIstegiYapDialog.setMinimumSize(new java.awt.Dimension(800, 600));
+        KullaniciEkranIzinIstegiYapDialog.setPreferredSize(new java.awt.Dimension(800, 600));
 
         jLabel12.setText("İzin başlangç");
 
@@ -150,6 +157,18 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
         });
 
         kullaniciEkranIzinisteIstekGonderButon.setText("İsteği Gönder");
+        kullaniciEkranIzinisteIstekGonderButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kullaniciEkranIzinisteIstekGonderButonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout KullaniciEkranIzinIstegiYapDialogLayout = new javax.swing.GroupLayout(KullaniciEkranIzinIstegiYapDialog.getContentPane());
         KullaniciEkranIzinIstegiYapDialog.getContentPane().setLayout(KullaniciEkranIzinIstegiYapDialogLayout);
@@ -158,13 +177,23 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
             .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
                 .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
+                        .addContainerGap()
+                        .addComponent(jButton1))
+                    .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
                         .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13))
-                        .addGap(18, 18, 18)
+                            .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                                .addGap(103, 103, 103)
+                                .addComponent(jLabel13))
+                            .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(jLabel12)))
+                        .addGap(32, 32, 32)
+                        .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(izinIstekBaslangicDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(izinIstekBitisDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(109, 109, 109)
                         .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kullaniciEkranIzinisteIstekGonderButon)
                             .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
                                 .addComponent(kullaniciEkranIzinistebitisGun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -176,35 +205,45 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(kullaniciEkranIzinistebaslangicAy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(kullaniciEkranIzinistebaslangicYil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(kullaniciEkranIzinisteTctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(kullaniciEkranIzinisteIstekGonderButon)))
-                .addContainerGap(89, Short.MAX_VALUE))
+                                .addComponent(kullaniciEkranIzinistebaslangicYil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         KullaniciEkranIzinIstegiYapDialogLayout.setVerticalGroup(
             KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kullaniciEkranIzinisteTctxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(34, 34, 34)
-                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(kullaniciEkranIzinistebaslangicGun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kullaniciEkranIzinistebaslangicAy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kullaniciEkranIzinistebaslangicYil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(kullaniciEkranIzinistebitisGun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kullaniciEkranIzinistebitisAy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kullaniciEkranIzinistebitisYil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                        .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(kullaniciEkranIzinistebaslangicGun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kullaniciEkranIzinistebaslangicAy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kullaniciEkranIzinistebaslangicYil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(11, 11, 11)
+                                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(kullaniciEkranIzinistebitisGun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kullaniciEkranIzinistebitisAy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kullaniciEkranIzinistebitisYil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                                .addGap(100, 100, 100)
+                                .addComponent(jLabel12)))
+                        .addGap(63, 63, 63)
+                        .addComponent(jButton1))
+                    .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(izinIstekBaslangicDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addGap(356, 356, 356))
+                    .addGroup(KullaniciEkranIzinIstegiYapDialogLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(izinIstekBitisDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(kullaniciEkranIzinisteIstekGonderButon)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
 
         kullaniciEkranIzinisteklerimDialog.setMinimumSize(new java.awt.Dimension(457, 374));
@@ -605,6 +644,96 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
        
     }//GEN-LAST:event_kullaniciEkranGuncelleGuncelleYapButonActionPerformed
 
+    private void kullaniciEkranIzinisteIstekGonderButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kullaniciEkranIzinisteIstekGonderButonActionPerformed
+   
+        boolean durum=false;
+        try {
+          
+       String baslangicGun=kullaniciEkranIzinistebaslangicGun.getSelectedItem().toString();
+       String baslangicAy=kullaniciEkranIzinistebaslangicAy.getSelectedItem().toString();
+       String baslangicYil=kullaniciEkranIzinistebaslangicYil.getSelectedItem().toString();
+       
+       String bitisGun=kullaniciEkranIzinistebitisGun.getSelectedItem().toString();
+       String bitisAy=kullaniciEkranIzinistebitisAy.getSelectedItem().toString();
+       String bitisYil=kullaniciEkranIzinistebitisYil.getSelectedItem().toString();
+       
+      
+       SimpleDateFormat ss=new SimpleDateFormat("dd-MM-yyyy");
+       Date d1=null;
+       Date d2=null;
+       
+        
+      
+            try {
+                d1=ss.parse(ss.format(izinIstekBaslangicDateChooser.getDate()));
+                d2=ss.parse(ss.format(izinIstekBitisDateChooser.getDate()));
+            } catch (Exception e) {
+            }
+       
+            long fark=d2.getTime()-d1.getTime();
+       
+            System.out.println("Fark: "+String.valueOf(fark));
+       
+       
+       String baslangicTarihi=baslangicGun+"-"+baslangicAy+"-"+baslangicYil;
+       String bitisTarihi=bitisGun+"-"+bitisAy+"-"+bitisYil;
+       
+      
+     
+        
+        
+        
+        IzinIstek izinIstek=new IzinIstek();
+        izinIstek.setTc_no(girisYapanKullanici.getTc_no());
+        izinIstek.setIzin_baslangic(baslangicTarihi);
+        izinIstek.setIzin_bitis(bitisTarihi);
+        izinIstek.setKalan_izin(girisYapanKullanici.getKalan_izin());
+        izinIstek.setKullanilan_izin(Integer.valueOf(25-girisYapanKullanici.getKalan_izin()));
+        
+        durum=izinIstek.izinIstegiOlustur(izinIstek);
+        if(durum)
+        {
+            JOptionPane.showMessageDialog(rootPane, "İzin isteğiniz oluşturuldu, yönetici tarafında onay bekliyor.");
+            KullaniciEkranIzinIstegiYapDialog.setVisible(false);
+            
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "Hata,bilgilerinizi kontrol edin.");
+        
+         
+    }
+     catch (Exception e) {
+         
+         JOptionPane.showMessageDialog(rootPane, "Hata,bilgilerinizi kontrol edin."+e);
+     }
+     
+        
+       
+        
+        
+    }//GEN-LAST:event_kullaniciEkranIzinisteIstekGonderButonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+       SimpleDateFormat ss=new SimpleDateFormat("yyyy-MM-dd");
+       Date d1=null;
+       Date d2=null;
+       
+        
+      
+            try {
+                d1=ss.parse(ss.format(izinIstekBaslangicDateChooser.getDate()));
+                d2=ss.parse(ss.format(izinIstekBitisDateChooser.getDate()));
+            } catch (Exception e) {
+            }
+       
+            long fark=d2.getTime()-d1.getTime();
+            long hours=fark/(60*60*1000);
+            long days=hours/24;
+       
+            System.out.println("Fark: "+String.valueOf(days)); ///seçilen izin günü diye bi alan oluştur tabloda onu int yap..
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -642,8 +771,10 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog KullaniciEkranIzinIstegiYapDialog;
+    private com.toedter.calendar.JCalendar izinIstekBaslangicDateChooser;
+    private com.toedter.calendar.JCalendar izinIstekBitisDateChooser;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -686,7 +817,6 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
     private javax.swing.JTextField kullaniciEkranGuncelleSifretxt;
     private javax.swing.JTextField kullaniciEkranGuncelleSoyAdtxt;
     private javax.swing.JButton kullaniciEkranIzinisteIstekGonderButon;
-    private javax.swing.JTextField kullaniciEkranIzinisteTctxt;
     private javax.swing.JComboBox<String> kullaniciEkranIzinistebaslangicAy;
     private javax.swing.JComboBox<String> kullaniciEkranIzinistebaslangicGun;
     private javax.swing.JComboBox<String> kullaniciEkranIzinistebaslangicYil;
