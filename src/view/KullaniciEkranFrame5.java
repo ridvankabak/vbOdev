@@ -28,7 +28,8 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
     private Kullanici girisYapaniGetir=new Kullanici();
     
     DefaultTableModel model=new DefaultTableModel();
-    ArrayList<String>sutunlar=new ArrayList<>();
+ 
+   
     
     
     public KullaniciEkranFrame5() {

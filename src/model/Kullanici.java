@@ -9,11 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Ridvan
- */
+
 public class Kullanici {
     
     private String tc_no;
@@ -249,6 +247,80 @@ public class Kullanici {
         
         return donecekKullanici;
     }
+    
+    
+    public DefaultTableModel tumKullanicilariGetir() //hiç bir filtre olmadan tüm kullanıcıları tabloya çekme
+    {
+        DefaultTableModel donecekModel=new DefaultTableModel();
+        donecekModel.setColumnIdentifiers(new String[]{"TC","Ad","Soyad","Kullanıcı Adı","Şifre","Şehir","Birim","Doğum Tarihi","Cinsiyet","Kalan İzin"});
+        try {
+            
+            veritabani_baglanti vb=new veritabani_baglanti();
+            vb.baglan();
+            String sorgu="select * from kullanici_tablo";
+            ps=vb.con.prepareCall(sorgu);
+           
+            rs=ps.executeQuery();
+           
+            while(rs.next())
+            {
+                donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("ad"),
+                    rs.getString("soyad"),rs.getString("k_adi"),rs.getString("sifre"),rs.getString("sehir"),
+                    rs.getString("birim"),rs.getString("dogum_tarihi"),rs.getString("cinsiyet"),
+                    String.valueOf(rs.getString("kalan_izin"))});
+              
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+        return donecekModel;
+    }
+    
+    
+    public DefaultTableModel adSoyadTumKullanicilariListele(String filtre)
+    {
+        DefaultTableModel donecekModel=new DefaultTableModel();
+        donecekModel.setColumnIdentifiers(new String[]{"TC","Ad","Soyad","Kullanıcı Adı","Şifre","Şehir","Birim","Doğum Tarihi","Cinsiyet","Kalan İzin"});
+        
+        
+        
+        
+          try {
+            
+            veritabani_baglanti vb=new veritabani_baglanti();
+            vb.baglan();
+            String sorgu="select * from kullanici_tablo where ad like ? or soyad like ?";
+            ps=vb.con.prepareCall(sorgu);
+            ps.setString(1, "%"+filtre+"%");
+            ps.setString(2, "%"+filtre+"%");
+           
+            rs=ps.executeQuery();
+           
+            while(rs.next())
+            {
+                donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("ad"),
+                    rs.getString("soyad"),rs.getString("k_adi"),rs.getString("sifre"),rs.getString("sehir"),
+                    rs.getString("birim"),rs.getString("dogum_tarihi"),rs.getString("cinsiyet"),
+                    String.valueOf(rs.getString("kalan_izin"))});
+              
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+        
+        return donecekModel;
+    }
+    
+    
+    
     
     
     

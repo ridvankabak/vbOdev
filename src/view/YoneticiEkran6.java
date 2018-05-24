@@ -5,17 +5,22 @@
  */
 package view;
 
-/**
- *
- * @author Ridvan
- */
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.IzinIstek;
+import model.Kullanici;
+
+
 public class YoneticiEkran6 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form YoneticiEkran6
-     */
+   
+    DefaultTableModel model=new DefaultTableModel();
+       DefaultTableModel model2Izin=new DefaultTableModel();
+            
+    
     public YoneticiEkran6() {
         initComponents();
+       
     }
 
     /**
@@ -32,6 +37,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         yoneticiEkranTumKullaniciDialogTablo = new javax.swing.JTable();
         yoneticiEkranTumKullaniciDialogAramaButton = new javax.swing.JButton();
         yoneticiEkranTumKullaniciDialogAramatxt = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         yoneticiEkranEskiizinlerDialog = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         yoneticiEkranEskiizinlerDialogizinTablo = new javax.swing.JTable();
@@ -58,7 +64,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         yoneticiEkranEskiIzinlerMenu = new javax.swing.JMenuItem();
         yoneticiEkranizinIstekleriMenu = new javax.swing.JMenuItem();
 
-        yoneticiEkranTumKullanicilarDialog.setMinimumSize(new java.awt.Dimension(598, 494));
+        yoneticiEkranTumKullanicilarDialog.setMinimumSize(new java.awt.Dimension(837, 465));
 
         yoneticiEkranTumKullaniciDialogTablo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,32 +80,42 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(yoneticiEkranTumKullaniciDialogTablo);
 
         yoneticiEkranTumKullaniciDialogAramaButton.setText("Kullanıcı Ara");
+        yoneticiEkranTumKullaniciDialogAramaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yoneticiEkranTumKullaniciDialogAramaButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Ad veya Soyad a göre arama yapar.");
 
         javax.swing.GroupLayout yoneticiEkranTumKullanicilarDialogLayout = new javax.swing.GroupLayout(yoneticiEkranTumKullanicilarDialog.getContentPane());
         yoneticiEkranTumKullanicilarDialog.getContentPane().setLayout(yoneticiEkranTumKullanicilarDialogLayout);
         yoneticiEkranTumKullanicilarDialogLayout.setHorizontalGroup(
             yoneticiEkranTumKullanicilarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranTumKullanicilarDialogLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(yoneticiEkranTumKullanicilarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(yoneticiEkranTumKullanicilarDialogLayout.createSequentialGroup()
-                        .addComponent(yoneticiEkranTumKullaniciDialogAramatxt)
+            .addGroup(yoneticiEkranTumKullanicilarDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(yoneticiEkranTumKullanicilarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranTumKullanicilarDialogLayout.createSequentialGroup()
+                        .addComponent(yoneticiEkranTumKullaniciDialogAramatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(yoneticiEkranTumKullaniciDialogAramaButton)
-                        .addGap(6, 6, 6))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(0, 48, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         yoneticiEkranTumKullanicilarDialogLayout.setVerticalGroup(
             yoneticiEkranTumKullanicilarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranTumKullanicilarDialogLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(yoneticiEkranTumKullanicilarDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yoneticiEkranTumKullaniciDialogAramatxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(yoneticiEkranTumKullaniciDialogAramaButton))
-                .addGap(26, 26, 26)
+                    .addComponent(yoneticiEkranTumKullaniciDialogAramaButton)
+                    .addComponent(jLabel6))
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
+                .addGap(70, 70, 70))
         );
 
         yoneticiEkranEskiizinlerDialog.setMinimumSize(new java.awt.Dimension(586, 463));
@@ -197,9 +213,19 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
 
         yoneticiEkranIzinistekleriOnaylaButon.setText("Onayla");
         yoneticiEkranIzinistekleriOnaylaButon.setEnabled(false);
+        yoneticiEkranIzinistekleriOnaylaButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yoneticiEkranIzinistekleriOnaylaButonActionPerformed(evt);
+            }
+        });
 
         yoneticiEkranIzinistekleriReddetButon.setText("Reddet");
         yoneticiEkranIzinistekleriReddetButon.setEnabled(false);
+        yoneticiEkranIzinistekleriReddetButon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yoneticiEkranIzinistekleriReddetButonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel5.setText("İzin istekleri");
@@ -209,31 +235,31 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         yoneticiEkranIzinistekleriDialogLayout.setHorizontalGroup(
             yoneticiEkranIzinistekleriDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranIzinistekleriDialogLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(275, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(250, 250, 250))
             .addGroup(yoneticiEkranIzinistekleriDialogLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane3)
+                .addGap(18, 18, 18)
                 .addGroup(yoneticiEkranIzinistekleriDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(yoneticiEkranIzinistekleriOnaylaButon)
                     .addComponent(yoneticiEkranIzinistekleriReddetButon))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         yoneticiEkranIzinistekleriDialogLayout.setVerticalGroup(
             yoneticiEkranIzinistekleriDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranIzinistekleriDialogLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addGroup(yoneticiEkranIzinistekleriDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(yoneticiEkranIzinistekleriDialogLayout.createSequentialGroup()
                         .addComponent(yoneticiEkranIzinistekleriOnaylaButon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(yoneticiEkranIzinistekleriReddetButon))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
+                        .addComponent(yoneticiEkranIzinistekleriReddetButon)))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -330,14 +356,29 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
 
     private void yoneticiEkranTumKullanicilarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranTumKullanicilarMenuActionPerformed
         yoneticiEkranTumKullanicilarDialog.setVisible(true);
+        
+        ///tüm kullanıcıları çek açılır açılmaz...
+        Kullanici kullaniciCekme=new Kullanici();
+        model=kullaniciCekme.tumKullanicilariGetir();
+        
+        yoneticiEkranTumKullaniciDialogTablo.setModel(model);
     }//GEN-LAST:event_yoneticiEkranTumKullanicilarMenuActionPerformed
 
     private void yoneticiEkranEskiIzinlerMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranEskiIzinlerMenuActionPerformed
         yoneticiEkranEskiizinlerDialog.setVisible(true);
+        
+        
     }//GEN-LAST:event_yoneticiEkranEskiIzinlerMenuActionPerformed
 
     private void yoneticiEkranizinIstekleriMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranizinIstekleriMenuActionPerformed
         yoneticiEkranIzinistekleriDialog.setVisible(true);
+        
+        //tüm izin isteklerini çekme...
+        IzinIstek izinIstekCekme=new IzinIstek();
+        model=izinIstekCekme.tumIzinIstekleriniGetir();
+        
+        yoneticiEkranIzinistekleriTablo.setModel(model);
+        
     }//GEN-LAST:event_yoneticiEkranizinIstekleriMenuActionPerformed
 
     private void yoneticiEkranIzinistekleriTabloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_yoneticiEkranIzinistekleriTabloMouseClicked
@@ -349,6 +390,56 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         yoneticiEkranIzinistekleriOnaylaButon.setEnabled(false);
         yoneticiEkranIzinistekleriReddetButon.setEnabled(false);
     }//GEN-LAST:event_yoneticiEkranIzinistekleriDialogMouseClicked
+
+    private void yoneticiEkranTumKullaniciDialogAramaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranTumKullaniciDialogAramaButtonActionPerformed
+        String filtre=yoneticiEkranTumKullaniciDialogAramatxt.getText();
+        Kullanici filtreliKullaniciCekme=new Kullanici();
+        model=filtreliKullaniciCekme.adSoyadTumKullanicilariListele(filtre);
+        
+        yoneticiEkranTumKullaniciDialogTablo.setModel(model);
+    }//GEN-LAST:event_yoneticiEkranTumKullaniciDialogAramaButtonActionPerformed
+
+    private void yoneticiEkranIzinistekleriOnaylaButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranIzinistekleriOnaylaButonActionPerformed
+       int secilenRow=yoneticiEkranIzinistekleriTablo.getSelectedRow();
+       String gidenIstekNo=model.getValueAt(secilenRow, 0).toString(); //TABLODA TIKLADIĞIMIZ SATIRIN 0. İNDİSİNİ YANİ istek noSİNİ ALDIM
+       //BUNU izinistekteki metoda yolla ve bu istek noya ye ait olan istek durumunu güncelleyip
+       //istek durumunu onay yapıp izin tablosuna ekle(eski izinler)
+       //   ayrıca onayladıktan sonra kullanıcı tablosundaki kalan izin gününü de düş...
+       //
+       
+        
+        boolean durum=false;
+        int secim=JOptionPane.showConfirmDialog(this, "Bu izin isteğini onaylamak istediğinize emin misiniz?", "Onay", JOptionPane.OK_CANCEL_OPTION);
+        if(secim==0) //eğer izin onaylanırsa..
+        {
+            IzinIstek izinOnayi=new IzinIstek();
+            durum=izinOnayi.istegiOnayla(gidenIstekNo);
+            if(durum)
+                JOptionPane.showConfirmDialog(this, "Seçim onaylandı.","onay",JOptionPane.OK_OPTION);
+            else
+                JOptionPane.showConfirmDialog(rootPane, "Hata, kontrol edin.");
+                
+        }
+    
+    }//GEN-LAST:event_yoneticiEkranIzinistekleriOnaylaButonActionPerformed
+
+    private void yoneticiEkranIzinistekleriReddetButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranIzinistekleriReddetButonActionPerformed
+        int secilenRow=yoneticiEkranIzinistekleriTablo.getSelectedRow();
+       String gidenIstekNo=model.getValueAt(secilenRow, 0).toString(); 
+       
+        boolean durum=false;
+        int secim=JOptionPane.showConfirmDialog(this, "Bu izin isteğini reddetmek istediğinize emin misiniz?", "Red", JOptionPane.OK_CANCEL_OPTION);
+        if(secim==0) //eğer izin reddedilirse..
+        {
+            IzinIstek izinRed=new IzinIstek();
+            durum=izinRed.istegiReddet(gidenIstekNo);
+            if(durum)
+                JOptionPane.showConfirmDialog(this, "Seçim onaylandı.","onay",JOptionPane.OK_OPTION);
+            else
+                JOptionPane.showConfirmDialog(rootPane, "Hata, kontrol edin.");
+                
+        }
+    }//GEN-LAST:event_yoneticiEkranIzinistekleriReddetButonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,6 +482,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;

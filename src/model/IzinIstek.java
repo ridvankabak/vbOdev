@@ -184,6 +184,241 @@ public class IzinIstek {
     }
     
     
+    
+     public DefaultTableModel tumIzinIstekleriniGetir() //hiç bir filtre olmadan tüm izinleri tabloya çekme
+    {
+        DefaultTableModel donecekModel=new DefaultTableModel();
+        donecekModel.setColumnIdentifiers(new String[]{"İstek No","TC","İzin Başlangıç","İzin Bitiş","Kullanılan İzin","Kalan İzin","İstek Durumu"});
+        try {
+            
+            veritabani_baglanti vb=new veritabani_baglanti();
+            vb.baglan();
+            String sorgu="select * from izin_istek_tablo";
+            ps=vb.con.prepareCall(sorgu);
+           
+            rs=ps.executeQuery();
+           
+            while(rs.next())
+            {
+                if(rs.getString("istek_durumu").equalsIgnoreCase("Cevap Bekleniyor"))
+                {
+                donecekModel.addRow(new String[]{String.valueOf(rs.getString("istek_no")),rs.getString("tc_no"),rs.getString("izin_baslangic"),
+                    rs.getString("izin_bitis"),String.valueOf(rs.getString("kullanilan_izin")),
+                    String.valueOf(rs.getString("kalan_izin")),rs.getString("istek_durumu")});
+                }
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+        return donecekModel;
+    }
+     
+     
+     
+     public boolean istegiOnayla(String onaylanacakIstekNo)
+     {
+         try {
+             veritabani_baglanti vb=new veritabani_baglanti();
+             vb.baglan();
+             
+            
+           String sorgu="Update izin_istek_tablo SET istek_durumu=? where istek_no=?";
+        
+          ps=vb.con.prepareStatement(sorgu);
+          ps.setString(1, "Onay");
+          ps.setString(2, onaylanacakIstekNo);
+          ps.execute();
+             
+             
+          
+          onaylananIsteginBilgileriniAktar(onaylanacakIstekNo);
+          //istek onaylanınca artık eski izinler tablosuna düşmesi gerekiyor.
+          //istek nesnesinin bilgilerini toplamak için select sorgulu metoda istek noyu attım. 1 nolu işlem.
+             
+             
+             
+             
+         } catch (Exception e) {
+             return false;
+         }
+         
+         
+         
+         return true;
+     }
+     
+     
+     public void onaylananIsteginBilgileriniAktar(String onaylananIstekNo)
+     {
+         //aldıgım istek noya göre nesnenin bilgilerini toplayıp nesneyi başka bir ekleme metoduna attım. 2 nolu işlem.
+         IzinIstek izinIstek=new IzinIstek();
+         
+         try {
+            
+        veritabani_baglanti vb=new veritabani_baglanti();
+        vb.baglan();
+        
+        String sorgu="select * from izin_istek_tablo where istek_no=?";
+        
+        ps=vb.con.prepareCall(sorgu);
+        ps.setString(1, onaylananIstekNo);
+        
+        rs=ps.executeQuery();
+        
+        while(rs.next())
+        {
+            izinIstek.setIzin_sure(Integer.valueOf(rs.getShort("izin_sure")));
+            int sure=izinIstek.getIzin_sure();
+            izinIstek.setTc_no(rs.getString("tc_no"));
+            izinIstek.setIzin_baslangic(rs.getString("izin_baslangic"));
+            izinIstek.setIzin_bitis(rs.getString("izin_bitis"));
+            izinIstek.setKullanilan_izin(Integer.valueOf(rs.getString("kullanilan_izin"))+sure);
+            izinIstek.setKalan_izin(Integer.valueOf(rs.getString("kalan_izin"))-sure);
+            izinIstek.setIstek_durumu(rs.getString("istek_durumu"));
+            
+            
+        }
+        
+       onaylananReddedilenIstegiIzinlereEkle(izinIstek);
+       nesneyiGuncelle(izinIstek); //izin gününü kullanıcı tablosundaki kullanıcının kalan izin gününden düşmesi için..
+        
+        
+        
+        } catch (Exception e) {
+        }
+     }
+     
+     
+     
+     public void onaylananReddedilenIstegiIzinlereEkle(IzinIstek izinIstek)
+     {
+         
+         //aldıgım nesnenin bilgilerine göre eski izinler tablosuna istek listesindeki bilgileri ekledim. 3 nolu işlem.
+         try {
+             veritabani_baglanti vb=new veritabani_baglanti();
+             vb.baglan();
+             
+             String sorgu="insert into izin_tablo(tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin,izin_durumu)"
+                     + "VALUES(?,?,?,?,?,?)";
+             
+             ps=vb.con.prepareCall(sorgu);
+             ps.setString(1, izinIstek.getTc_no());
+              ps.setString(2, izinIstek.getIzin_baslangic());
+               ps.setString(3, izinIstek.getIzin_bitis());
+                ps.setString(4, String.valueOf(izinIstek.getKullanilan_izin()));
+                 ps.setString(5, String.valueOf(izinIstek.getKalan_izin()));
+                  ps.setString(6, izinIstek.getIstek_durumu());
+            
+                  
+            ps.execute();
+                 
+                     
+             
+         } catch (Exception e) {
+         }
+     }
+     
+     
+     public void nesneyiGuncelle(IzinIstek izinIstek)
+     {
+         String tc=izinIstek.getTc_no();
+         int yeniKalanIzin=izinIstek.getKalan_izin();
+         try {
+             
+             veritabani_baglanti vb=new veritabani_baglanti();
+             vb.baglan();
+             
+             String sorgu="update kullanici_tablo SET kalan_izin=? where tc_no=?";
+             
+             ps=vb.con.prepareCall(sorgu);
+             ps.setString(1, String.valueOf(yeniKalanIzin));
+             ps.setString(2, tc);
+             
+             ps.execute();
+             
+             
+             
+             
+         } catch (Exception e) {
+         }
+     }
+     
+     public boolean istegiReddet(String reddedilecekIstekNo )
+     {
+          try {
+             veritabani_baglanti vb=new veritabani_baglanti();
+             vb.baglan();
+             
+            
+           String sorgu="Update izin_istek_tablo SET istek_durumu=? where istek_no=?";
+        
+          ps=vb.con.prepareStatement(sorgu);
+          ps.setString(1, "Red");
+          ps.setString(2, reddedilecekIstekNo);
+          ps.execute();
+             
+             
+          
+          redDEdilenIsteginBilgileriniAktar(reddedilecekIstekNo);
+          //istek onaylanınca artık eski izinler tablosuna düşmesi gerekiyor.
+          //istek nesnesinin bilgilerini toplamak için select sorgulu metoda istek noyu attım. 1 nolu işlem.
+             
+             
+             
+             
+         } catch (Exception e) {
+             return false;
+         }
+         
+         
+         
+         return true;
+     }
+
+    public void redDEdilenIsteginBilgileriniAktar(String reddedilecekIstekNo) {
+        //aldıgım istek noya göre nesnenin bilgilerini toplayıp nesneyi başka bir ekleme metoduna attım. 2 nolu işlem.
+         IzinIstek izinIstek=new IzinIstek();
+         
+         try {
+            
+        veritabani_baglanti vb=new veritabani_baglanti();
+        vb.baglan();
+        
+        String sorgu="select * from izin_istek_tablo where istek_no=?";
+        
+        ps=vb.con.prepareCall(sorgu);
+        ps.setString(1, reddedilecekIstekNo);
+        
+        rs=ps.executeQuery();
+        
+        while(rs.next())
+        {
+            izinIstek.setIzin_sure(Integer.valueOf(rs.getShort("izin_sure")));
+           
+            izinIstek.setTc_no(rs.getString("tc_no"));
+            izinIstek.setIzin_baslangic(rs.getString("izin_baslangic"));
+            izinIstek.setIzin_bitis(rs.getString("izin_bitis"));
+            izinIstek.setKullanilan_izin(Integer.valueOf(rs.getString("kullanilan_izin")));
+            izinIstek.setKalan_izin(Integer.valueOf(rs.getString("kalan_izin")));
+            izinIstek.setIstek_durumu(rs.getString("istek_durumu"));
+            
+            
+        }
+        
+       onaylananReddedilenIstegiIzinlereEkle(izinIstek);
+       nesneyiGuncelle(izinIstek); //izin gününü kullanıcı tablosundaki kullanıcının kalan izin gününden düşmesi için..
+        
+        
+        
+        } catch (Exception e) {
+        }
+    }
+    
+    
    
     
     
