@@ -26,7 +26,16 @@ public class IzinIstek {
     private String izin_bitis;
     private int kullanilan_izin;
     private int kalan_izin;
+    private int izin_sure;
     private String istek_durumu; //default
+
+    public int getIzin_sure() {
+        return izin_sure;
+    }
+
+    public void setIzin_sure(int izin_sure) {
+        this.izin_sure = izin_sure;
+    }
 
     public String getIzin_baslangic() {
         return izin_baslangic;
@@ -107,8 +116,8 @@ public class IzinIstek {
             veritabani_baglanti vb=new veritabani_baglanti();
             vb.baglan();
             
-            String sorgu="insert into izin_istek_tablo (tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin)"
-                    + "VALUES(?,?,?,?,?)";
+            String sorgu="insert into izin_istek_tablo (tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin,izin_sure)"
+                    + "VALUES(?,?,?,?,?,?)";
             
             
             ps=vb.con.prepareStatement(sorgu);
@@ -116,8 +125,9 @@ public class IzinIstek {
             ps.setString(1, izinIstek.getTc_no());
             ps.setString(2, String.valueOf(izinIstek.getIzin_baslangic()));
             ps.setString(3, String.valueOf(izinIstek.getIzin_bitis()));
-            ps.setString(4, String.valueOf(izinIstek.kullanilan_izin));
-            ps.setString(5, String.valueOf(izinIstek.kalan_izin));
+            ps.setString(4, String.valueOf(izinIstek.getKullanilan_izin()));
+            ps.setString(5, String.valueOf(izinIstek.getKalan_izin()));
+            ps.setString(6, String.valueOf(izinIstek.getIzin_sure()));
             
             ps.execute();
             
