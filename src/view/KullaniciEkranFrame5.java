@@ -9,17 +9,17 @@ package view;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.IzinIstek;
 import model.Kullanici;
 
-/**
- *
- * @author Ridvan
- */
+
+
 public class KullaniciEkranFrame5 extends javax.swing.JFrame {
 
     private String girisYapanKullaniciAdi,girisYapanKullaniciK_adi;
@@ -27,8 +27,14 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
    
     private Kullanici girisYapaniGetir=new Kullanici();
     
+    DefaultTableModel model=new DefaultTableModel();
+    ArrayList<String>sutunlar=new ArrayList<>();
+    
+    
     public KullaniciEkranFrame5() {
         initComponents();
+        
+        
     }
 
     KullaniciEkranFrame5(String gelenKullaniciAdi) {
@@ -39,7 +45,8 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
         
         
        anasayfaBilgileriniGetir();
-        
+       
+       
         
         
        
@@ -165,46 +172,46 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
                 .addContainerGap(178, Short.MAX_VALUE))
         );
 
-        kullaniciEkranIzinisteklerimDialog.setMinimumSize(new java.awt.Dimension(457, 374));
+        kullaniciEkranIzinisteklerimDialog.setMinimumSize(new java.awt.Dimension(865, 536));
 
         kullaniciEkranIzinisteklerimDialogTablo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "TC", "Ad", "Soyad", "İzin Başvurusu", "Durumu"
             }
         ));
         jScrollPane1.setViewportView(kullaniciEkranIzinisteklerimDialogTablo);
 
         jLabel19.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel19.setText("Alınan İzinler");
+        jLabel19.setText("İzin isteklerim");
 
         javax.swing.GroupLayout kullaniciEkranIzinisteklerimDialogLayout = new javax.swing.GroupLayout(kullaniciEkranIzinisteklerimDialog.getContentPane());
         kullaniciEkranIzinisteklerimDialog.getContentPane().setLayout(kullaniciEkranIzinisteklerimDialogLayout);
         kullaniciEkranIzinisteklerimDialogLayout.setHorizontalGroup(
             kullaniciEkranIzinisteklerimDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kullaniciEkranIzinisteklerimDialogLayout.createSequentialGroup()
-                .addGroup(kullaniciEkranIzinisteklerimDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kullaniciEkranIzinisteklerimDialogLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(kullaniciEkranIzinisteklerimDialogLayout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jLabel19)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(292, 292, 292)
+                .addComponent(jLabel19)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(kullaniciEkranIzinisteklerimDialogLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+                .addContainerGap())
         );
         kullaniciEkranIzinisteklerimDialogLayout.setVerticalGroup(
             kullaniciEkranIzinisteklerimDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kullaniciEkranIzinisteklerimDialogLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel19)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         kullaniciEkranBilgilerimiGuncelleDialog.setMinimumSize(new java.awt.Dimension(433, 532));
@@ -492,6 +499,13 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
 
     private void kullaiciEkranIzinisteklerimMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kullaiciEkranIzinisteklerimMenuActionPerformed
        kullaniciEkranIzinisteklerimDialog.setVisible(true);
+       //tabloyu doldur, sadece kendi izin başvurularını görebilsin.
+      
+       IzinIstek izinTabloDoldurma=new IzinIstek();
+       model=izinTabloDoldurma.izinIstekTablosunuDoldur(girisYapanKullanici.getTc_no());
+        kullaniciEkranIzinisteklerimDialogTablo.setModel(model);
+       
+        
     }//GEN-LAST:event_kullaiciEkranIzinisteklerimMenuActionPerformed
 
     private void kullaiciEkranBilgilerimiGuncelleMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kullaiciEkranBilgilerimiGuncelleMenuActionPerformed

@@ -5,10 +5,13 @@
  */
 package model;
 
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.StringStack;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -138,6 +141,46 @@ public class IzinIstek {
         }
         
         return true;
+    }
+    
+    public DefaultTableModel izinIstekTablosunuDoldur(String gelenTc)
+    {
+        DefaultTableModel donecekModel=new DefaultTableModel();
+        donecekModel.setColumnIdentifiers(new String[] {"TC","İzin Başvurusu","Durumu"}); //tabloyu burda doldurup göndereceğim.
+        
+        try {
+            
+            veritabani_baglanti vb=new veritabani_baglanti();
+            vb.baglan();
+            
+            String sorgu="Select * from izin_istek_tablo where tc_no=?";
+            ps=vb.con.prepareCall(sorgu);
+            
+            ps.setString(1, gelenTc);
+             rs=ps.executeQuery();
+            while(rs.next())
+            {
+                String tc=rs.getString("tc_no");
+                String izinBasvurusu=rs.getString("izin_baslangic")+" -->"+rs.getString("izin_bitis");
+                String durumu=rs.getString("istek_durumu");
+               // donecekModel.addRow(new String[]{rs.getString("tc_no").toString(),(rs.getString("izin_baslangic")+"-"+rs.getString("izin_bitis")).toString(),rs.getString("istek_durumu").toString()});
+            
+                System.out.println(tc+" "+izinBasvurusu+" "+durumu);
+                
+                donecekModel.addRow(new String[] {tc,izinBasvurusu,durumu});
+            }
+            
+           
+            
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+        return donecekModel;
+        
     }
     
     
