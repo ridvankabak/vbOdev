@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.IzinIstek;
@@ -42,7 +43,6 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         yoneticiEkranEskiizinlerDialogizinTablo = new javax.swing.JTable();
         yoneticiEkranEskiizinlerDialogizinAraButton = new javax.swing.JButton();
-        yoneticiEkranEskiizinlerDialogizinAramaGirisTxt = new javax.swing.JTextField();
         yoneticiEkranEskiizinlerDialogIzinYillikFiltre = new javax.swing.JCheckBox();
         yoneticiEkranEskiizinlerDialogIzinMazeretFiltre = new javax.swing.JCheckBox();
         yoneticiEkranEskiizinlerDialogIzinRaporFiltre = new javax.swing.JCheckBox();
@@ -118,7 +118,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
                 .addGap(70, 70, 70))
         );
 
-        yoneticiEkranEskiizinlerDialog.setMinimumSize(new java.awt.Dimension(586, 463));
+        yoneticiEkranEskiizinlerDialog.setMinimumSize(new java.awt.Dimension(1138, 540));
 
         yoneticiEkranEskiizinlerDialogizinTablo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,7 +133,12 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(yoneticiEkranEskiizinlerDialogizinTablo);
 
-        yoneticiEkranEskiizinlerDialogizinAraButton.setText("İzin Ara");
+        yoneticiEkranEskiizinlerDialogizinAraButton.setText("Filtrele");
+        yoneticiEkranEskiizinlerDialogizinAraButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yoneticiEkranEskiizinlerDialogizinAraButtonActionPerformed(evt);
+            }
+        });
 
         yoneticiEkranEskiizinlerDialogIzinYillikFiltre.setText("Yıllık");
 
@@ -147,43 +152,35 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         yoneticiEkranEskiizinlerDialog.getContentPane().setLayout(yoneticiEkranEskiizinlerDialogLayout);
         yoneticiEkranEskiizinlerDialogLayout.setHorizontalGroup(
             yoneticiEkranEskiizinlerDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranEskiizinlerDialogLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(yoneticiEkranEskiizinlerDialogizinAramaGirisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(yoneticiEkranEskiizinlerDialogizinAraButton)
-                .addGap(20, 20, 20))
+            .addGroup(yoneticiEkranEskiizinlerDialogLayout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
             .addGroup(yoneticiEkranEskiizinlerDialogLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(yoneticiEkranEskiizinlerDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(yoneticiEkranEskiizinlerDialogLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(yoneticiEkranEskiizinlerDialogIzinYillikFiltre)
-                        .addGap(53, 53, 53)
-                        .addComponent(yoneticiEkranEskiizinlerDialogIzinMazeretFiltre)
-                        .addGap(54, 54, 54)
-                        .addComponent(yoneticiEkranEskiizinlerDialogIzinRaporFiltre)
-                        .addGap(37, 37, 37)
-                        .addComponent(yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(yoneticiEkranEskiizinlerDialogIzinYillikFiltre)
+                .addGap(53, 53, 53)
+                .addComponent(yoneticiEkranEskiizinlerDialogIzinMazeretFiltre)
+                .addGap(54, 54, 54)
+                .addComponent(yoneticiEkranEskiizinlerDialogIzinRaporFiltre)
+                .addGap(37, 37, 37)
+                .addComponent(yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre)
+                .addGap(18, 18, 18)
+                .addComponent(yoneticiEkranEskiizinlerDialogizinAraButton)
+                .addContainerGap(637, Short.MAX_VALUE))
         );
         yoneticiEkranEskiizinlerDialogLayout.setVerticalGroup(
             yoneticiEkranEskiizinlerDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, yoneticiEkranEskiizinlerDialogLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(yoneticiEkranEskiizinlerDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(yoneticiEkranEskiizinlerDialogizinAramaGirisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(yoneticiEkranEskiizinlerDialogizinAraButton))
-                .addGap(27, 27, 27)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addGroup(yoneticiEkranEskiizinlerDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yoneticiEkranEskiizinlerDialogIzinYillikFiltre)
                     .addComponent(yoneticiEkranEskiizinlerDialogIzinMazeretFiltre)
                     .addComponent(yoneticiEkranEskiizinlerDialogIzinRaporFiltre)
-                    .addComponent(yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                    .addComponent(yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre)
+                    .addComponent(yoneticiEkranEskiizinlerDialogizinAraButton))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         yoneticiEkranIzinistekleriDialog.setMinimumSize(new java.awt.Dimension(663, 461));
@@ -367,6 +364,20 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
     private void yoneticiEkranEskiIzinlerMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranEskiIzinlerMenuActionPerformed
         yoneticiEkranEskiizinlerDialog.setVisible(true);
         
+        IzinIstek eskiIzinleriListeleyici=new IzinIstek();
+        
+        /*
+        ArrayList<String> filtreler=new ArrayList<String>();
+        
+        if(yoneticiEkranEskiizinlerDialogIzinYillikFiltre.isSelected())
+            filtreler.add(yoneticiEkranEskiizinlerDialogIzinYillikFiltre.getText());
+        
+        */
+        
+        model=eskiIzinleriListeleyici.eskiIzinleriListele();
+        yoneticiEkranEskiizinlerDialogizinTablo.setModel(model);
+        
+        
         
     }//GEN-LAST:event_yoneticiEkranEskiIzinlerMenuActionPerformed
 
@@ -441,6 +452,38 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_yoneticiEkranIzinistekleriReddetButonActionPerformed
 
+    private void yoneticiEkranEskiizinlerDialogizinAraButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiEkranEskiizinlerDialogizinAraButtonActionPerformed
+                IzinIstek eskiIzinleriFiltreliListeleyici=new IzinIstek();
+        
+        
+        ArrayList<String> filtreler=new ArrayList<String>(); //4 çeşit filtreden seçili olanları eklemesi için..
+        
+        filtreler.clear();
+        
+        if(yoneticiEkranEskiizinlerDialogIzinYillikFiltre.isSelected())
+            filtreler.add(yoneticiEkranEskiizinlerDialogIzinYillikFiltre.getText());
+        if(yoneticiEkranEskiizinlerDialogIzinMazeretFiltre.isSelected())
+            filtreler.add(yoneticiEkranEskiizinlerDialogIzinMazeretFiltre.getText());
+        if(yoneticiEkranEskiizinlerDialogIzinRaporFiltre.isSelected())
+            filtreler.add(yoneticiEkranEskiizinlerDialogIzinRaporFiltre.getText());
+        if(yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre.isSelected())
+            filtreler.add(yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre.getText());
+        
+        if(filtreler.size()<1)
+        {
+            //eğer filtre yoksa tabloyu filtresiz bi şekilde tüm eski izinler ile doldur.
+            model=eskiIzinleriFiltreliListeleyici.eskiIzinleriListele();
+            yoneticiEkranEskiizinlerDialogizinTablo.setModel(model);
+        }
+        else
+        {
+        
+        
+        model=eskiIzinleriFiltreliListeleyici.eskiIzinleriFiltreliListele(filtreler);
+        yoneticiEkranEskiizinlerDialogizinTablo.setModel(model);
+        }
+    }//GEN-LAST:event_yoneticiEkranEskiizinlerDialogizinAraButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -496,7 +539,6 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
     private javax.swing.JCheckBox yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre;
     private javax.swing.JCheckBox yoneticiEkranEskiizinlerDialogIzinYillikFiltre;
     private javax.swing.JButton yoneticiEkranEskiizinlerDialogizinAraButton;
-    private javax.swing.JTextField yoneticiEkranEskiizinlerDialogizinAramaGirisTxt;
     private javax.swing.JTable yoneticiEkranEskiizinlerDialogizinTablo;
     private javax.swing.JDialog yoneticiEkranIzinistekleriDialog;
     private javax.swing.JButton yoneticiEkranIzinistekleriOnaylaButon;

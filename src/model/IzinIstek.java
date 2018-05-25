@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,9 +29,18 @@ public class IzinIstek {
     private String izin_baslangic;
     private String izin_bitis;
     private int kullanilan_izin;
+
+    public String getIzin_turu() {
+        return izin_turu;
+    }
+
+    public void setIzin_turu(String izin_turu) {
+        this.izin_turu = izin_turu;
+    }
     private int kalan_izin;
     private int izin_sure;
     private String istek_durumu; //default
+    private String izin_turu;
 
     public int getIzin_sure() {
         return izin_sure;
@@ -119,8 +129,8 @@ public class IzinIstek {
             veritabani_baglanti vb=new veritabani_baglanti();
             vb.baglan();
             
-            String sorgu="insert into izin_istek_tablo (tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin,izin_sure)"
-                    + "VALUES(?,?,?,?,?,?)";
+            String sorgu="insert into izin_istek_tablo (tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin,izin_sure,izin_turu)"
+                    + "VALUES(?,?,?,?,?,?,?)";
             
             
             ps=vb.con.prepareStatement(sorgu);
@@ -131,6 +141,7 @@ public class IzinIstek {
             ps.setString(4, String.valueOf(izinIstek.getKullanilan_izin()));
             ps.setString(5, String.valueOf(izinIstek.getKalan_izin()));
             ps.setString(6, String.valueOf(izinIstek.getIzin_sure()));
+            ps.setString(7, izinIstek.getIzin_turu());
             
             ps.execute();
             
@@ -188,7 +199,7 @@ public class IzinIstek {
      public DefaultTableModel tumIzinIstekleriniGetir() //hiç bir filtre olmadan tüm izinleri tabloya çekme
     {
         DefaultTableModel donecekModel=new DefaultTableModel();
-        donecekModel.setColumnIdentifiers(new String[]{"İstek No","TC","İzin Başlangıç","İzin Bitiş","Kullanılan İzin","Kalan İzin","İstek Durumu"});
+        donecekModel.setColumnIdentifiers(new String[]{"İstek No","TC","İzin Başlangıç","İzin Bitiş","Kullanılan İzin","Kalan İzin","İstek Durumu", "İzin Türü"});
         try {
             
             veritabani_baglanti vb=new veritabani_baglanti();
@@ -204,7 +215,7 @@ public class IzinIstek {
                 {
                 donecekModel.addRow(new String[]{String.valueOf(rs.getString("istek_no")),rs.getString("tc_no"),rs.getString("izin_baslangic"),
                     rs.getString("izin_bitis"),String.valueOf(rs.getString("kullanilan_izin")),
-                    String.valueOf(rs.getString("kalan_izin")),rs.getString("istek_durumu")});
+                    String.valueOf(rs.getString("kalan_izin")),rs.getString("istek_durumu"),rs.getString("izin_turu")});
                 }
             }
             
@@ -279,6 +290,7 @@ public class IzinIstek {
             izinIstek.setKullanilan_izin(Integer.valueOf(rs.getString("kullanilan_izin"))+sure);
             izinIstek.setKalan_izin(Integer.valueOf(rs.getString("kalan_izin"))-sure);
             izinIstek.setIstek_durumu(rs.getString("istek_durumu"));
+            izinIstek.setIzin_turu(rs.getString("izin_turu"));
             
             
         }
@@ -302,8 +314,8 @@ public class IzinIstek {
              veritabani_baglanti vb=new veritabani_baglanti();
              vb.baglan();
              
-             String sorgu="insert into izin_tablo(tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin,izin_durumu)"
-                     + "VALUES(?,?,?,?,?,?)";
+             String sorgu="insert into izin_tablo(tc_no,izin_baslangic,izin_bitis,kullanilan_izin,kalan_izin,izin_durumu,izin_turu)"
+                     + "VALUES(?,?,?,?,?,?,?)";
              
              ps=vb.con.prepareCall(sorgu);
              ps.setString(1, izinIstek.getTc_no());
@@ -312,6 +324,7 @@ public class IzinIstek {
                 ps.setString(4, String.valueOf(izinIstek.getKullanilan_izin()));
                  ps.setString(5, String.valueOf(izinIstek.getKalan_izin()));
                   ps.setString(6, izinIstek.getIstek_durumu());
+                  ps.setString(7, izinIstek.getIzin_turu());
             
                   
             ps.execute();
@@ -405,6 +418,7 @@ public class IzinIstek {
             izinIstek.setKullanilan_izin(Integer.valueOf(rs.getString("kullanilan_izin")));
             izinIstek.setKalan_izin(Integer.valueOf(rs.getString("kalan_izin")));
             izinIstek.setIstek_durumu(rs.getString("istek_durumu"));
+            izinIstek.setIzin_turu(rs.getString("izin_turu"));
             
             
         }
@@ -421,7 +435,116 @@ public class IzinIstek {
     
    
     
+    public DefaultTableModel eskiIzinleriListele()
+    {
+        DefaultTableModel donecekModel=new DefaultTableModel();
+        
+        donecekModel.setColumnIdentifiers(new String[]{"TC No","İzin başlangıcı","İzin Bitişi","Daha önce kullanılan izin sayısı","Kullanıcının kalan izni","İzin Başvuru durumu","İzin Türü"});
+        
+        try {
+            
+            veritabani_baglanti vb=new veritabani_baglanti();
+            vb.baglan();
+            
+            String sorgu="select * from izin_tablo";
+            
+            ps=vb.con.prepareCall(sorgu);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("izin_baslangic"),rs.getString("izin_bitis"),
+                String.valueOf(rs.getString("kullanilan_izin")),String.valueOf(rs.getString("kalan_izin")),
+                rs.getString("izin_durumu"),rs.getString("izin_turu")});
+            }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        return donecekModel;
+    }
     
+    
+    public DefaultTableModel eskiIzinleriFiltreliListele(ArrayList<String>gelenFiltrelerListe)
+    {
+        DefaultTableModel donecekModel=new DefaultTableModel();
+        donecekModel.setColumnIdentifiers(new String[]{"TC No","İzin başlangıcı","İzin Bitişi","Daha önce kullanılan izin sayısı","Kullanıcının kalan izni","İzin Başvuru durumu","İzin Türü"});
+
+        try {
+            veritabani_baglanti vb=new veritabani_baglanti();
+            vb.baglan();
+            
+            String sorgu="";
+            
+            if(gelenFiltrelerListe.size()==1)
+            {
+                sorgu="select * from izin_tablo where izin_turu=?";
+                
+                ps=vb.con.prepareCall(sorgu);
+                ps.setString(1, gelenFiltrelerListe.get(0));
+                rs=ps.executeQuery();
+                while(rs.next())
+                {
+                     donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("izin_baslangic"),rs.getString("izin_bitis"),
+                String.valueOf(rs.getString("kullanilan_izin")),String.valueOf(rs.getString("kalan_izin")),
+                rs.getString("izin_durumu"),rs.getString("izin_turu")});
+                }
+            }
+            else if(gelenFiltrelerListe.size()==2)
+            {
+                sorgu="select * from izin_tablo where izin_turu in(?,?)";
+                ps=vb.con.prepareCall(sorgu);
+                ps.setString(1, gelenFiltrelerListe.get(0));
+                ps.setString(2, gelenFiltrelerListe.get(1));
+                rs=ps.executeQuery();
+                while(rs.next())
+                {
+                     donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("izin_baslangic"),rs.getString("izin_bitis"),
+                String.valueOf(rs.getString("kullanilan_izin")),String.valueOf(rs.getString("kalan_izin")),
+                rs.getString("izin_durumu"),rs.getString("izin_turu")});
+                }
+                
+            }
+             else if(gelenFiltrelerListe.size()==3)
+            {
+                sorgu="select * from izin_tablo where izin_turu in(?,?,?)";
+                ps=vb.con.prepareCall(sorgu);
+                ps.setString(1, gelenFiltrelerListe.get(0));
+                ps.setString(2, gelenFiltrelerListe.get(1));
+                ps.setString(3, gelenFiltrelerListe.get(2));
+                rs=ps.executeQuery();
+                while(rs.next())
+                {
+                     donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("izin_baslangic"),rs.getString("izin_bitis"),
+                String.valueOf(rs.getString("kullanilan_izin")),String.valueOf(rs.getString("kalan_izin")),
+                rs.getString("izin_durumu"),rs.getString("izin_turu")});
+                }
+                
+            }
+            else
+             {
+                  sorgu="select * from izin_tablo where izin_turu in(?,?,?,?)";
+                ps=vb.con.prepareCall(sorgu);
+                ps.setString(1, gelenFiltrelerListe.get(0));
+                ps.setString(2, gelenFiltrelerListe.get(1));
+                ps.setString(3, gelenFiltrelerListe.get(2));
+                ps.setString(4, gelenFiltrelerListe.get(3));
+                rs=ps.executeQuery();
+                while(rs.next())
+                {
+                     donecekModel.addRow(new String[]{rs.getString("tc_no"),rs.getString("izin_baslangic"),rs.getString("izin_bitis"),
+                String.valueOf(rs.getString("kullanilan_izin")),String.valueOf(rs.getString("kalan_izin")),
+                rs.getString("izin_durumu"),rs.getString("izin_turu")});
+                }
+             }
+            
+            
+        } catch (Exception e) {
+        }
+        
+        return donecekModel;
+    }
    
     
 }

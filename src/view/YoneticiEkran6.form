@@ -114,57 +114,46 @@
     <Container class="javax.swing.JDialog" name="yoneticiEkranEskiizinlerDialog">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[586, 463]"/>
+          <Dimension value="[1138, 540]"/>
         </Property>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="yoneticiEkranEskiizinlerDialogizinAramaGirisTxt" min="-2" pref="476" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="yoneticiEkranEskiizinlerDialogizinAraButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="566" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                          <Component id="yoneticiEkranEskiizinlerDialogIzinYillikFiltre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                          <Component id="yoneticiEkranEskiizinlerDialogIzinMazeretFiltre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="yoneticiEkranEskiizinlerDialogIzinRaporFiltre" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="yoneticiEkranEskiizinlerDialogIzinYillikFiltre" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  <Component id="yoneticiEkranEskiizinlerDialogIzinMazeretFiltre" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                  <Component id="yoneticiEkranEskiizinlerDialogIzinRaporFiltre" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="yoneticiEkranEskiizinlerDialogizinAraButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="637" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="yoneticiEkranEskiizinlerDialogizinAramaGirisTxt" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="yoneticiEkranEskiizinlerDialogizinAraButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace pref="116" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="yoneticiEkranEskiizinlerDialogIzinYillikFiltre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="yoneticiEkranEskiizinlerDialogIzinMazeretFiltre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="yoneticiEkranEskiizinlerDialogIzinRaporFiltre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="yoneticiEkranEskiizinlerDialogIzinUcretsizFiltre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="yoneticiEkranEskiizinlerDialogizinAraButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="322" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="350" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -193,10 +182,11 @@
         </Container>
         <Component class="javax.swing.JButton" name="yoneticiEkranEskiizinlerDialogizinAraButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x130;zin Ara"/>
+            <Property name="text" type="java.lang.String" value="Filtrele"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="yoneticiEkranEskiizinlerDialogizinAramaGirisTxt">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yoneticiEkranEskiizinlerDialogizinAraButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="yoneticiEkranEskiizinlerDialogIzinYillikFiltre">
           <Properties>
