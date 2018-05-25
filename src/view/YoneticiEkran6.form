@@ -378,10 +378,11 @@
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="295" max="32767" attributes="0"/>
+              <EmptySpace pref="282" max="32767" attributes="0"/>
               <Component id="yoneticiEkranCikisGeriButon" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -406,7 +407,9 @@
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="223" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="189" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -414,22 +417,22 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ho&#x15f; geldiniz, bla bla bla..."/>
+        <Property name="text" type="java.lang.String" value="Ho&#x15f; geldiniz, Arda &#xc7;ankaya"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x130;sim : bla bla"/>
+        <Property name="text" type="java.lang.String" value="&#x130;sim : Arda"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Soyisim : bla bla"/>
+        <Property name="text" type="java.lang.String" value="Soyisim : &#xc7;ankaya"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kullan&#x131;c&#x131; Ad&#x131; :"/>
+        <Property name="text" type="java.lang.String" value="Kullan&#x131;c&#x131; Ad&#x131; : veritabani"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="yoneticiEkranCikisGeriButon">
@@ -442,6 +445,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yoneticiEkranCikisGeriButonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x15e;ifre : veritabani"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

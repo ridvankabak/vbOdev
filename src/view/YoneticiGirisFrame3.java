@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ridvan
@@ -28,12 +30,12 @@ public class YoneticiGirisFrame3 extends javax.swing.JFrame {
     private void initComponents() {
 
         yoneticiGiris3KullaniciAditxt = new javax.swing.JTextField();
-        yoneticiGiris3Sifretxt = new javax.swing.JTextField();
         yoneticiGiris3GirisYapButon = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         yoneticiGirisGeriButon = new javax.swing.JButton();
+        yoneticiGiris3Sifretxt = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +78,8 @@ public class YoneticiGirisFrame3 extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(yoneticiGiris3KullaniciAditxt)
-                            .addComponent(yoneticiGiris3Sifretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(yoneticiGiris3KullaniciAditxt, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(yoneticiGiris3Sifretxt))
                         .addGap(71, 71, 71))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(yoneticiGiris3GirisYapButon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -95,11 +97,11 @@ public class YoneticiGirisFrame3 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(yoneticiGiris3KullaniciAditxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(yoneticiGiris3Sifretxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(37, 37, 37)
                 .addComponent(yoneticiGiris3GirisYapButon)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -114,9 +116,15 @@ public class YoneticiGirisFrame3 extends javax.swing.JFrame {
     }//GEN-LAST:event_yoneticiGirisGeriButonActionPerformed
 
     private void yoneticiGiris3GirisYapButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yoneticiGiris3GirisYapButonActionPerformed
+        if(yoneticiGiris3KullaniciAditxt.getText().equals("veritabani")
+                && yoneticiGiris3Sifretxt.getText().equals("veritabani"))
+        {
         YoneticiEkran6 yy=new YoneticiEkran6();
         yy.setVisible(true);
         setVisible(false);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Şifreniz ya da kullanıcı adınız hatalı !","Hata",JOptionPane.OK_OPTION);
     }//GEN-LAST:event_yoneticiGiris3GirisYapButonActionPerformed
 
     /**
@@ -160,7 +168,7 @@ public class YoneticiGirisFrame3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton yoneticiGiris3GirisYapButon;
     private javax.swing.JTextField yoneticiGiris3KullaniciAditxt;
-    private javax.swing.JTextField yoneticiGiris3Sifretxt;
+    private javax.swing.JPasswordField yoneticiGiris3Sifretxt;
     private javax.swing.JButton yoneticiGirisGeriButon;
     // End of variables declaration//GEN-END:variables
 }

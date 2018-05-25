@@ -128,8 +128,16 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JCalendar" name="izinIstekBaslangicDateChooser">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="99" red="0" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JCalendar" name="izinIstekBitisDateChooser">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="izinTurYillik">
           <Properties>

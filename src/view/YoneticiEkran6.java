@@ -16,7 +16,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
 
    
     DefaultTableModel model=new DefaultTableModel();
-       DefaultTableModel model2Izin=new DefaultTableModel();
+    
             
     
     public YoneticiEkran6() {
@@ -58,6 +58,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         yoneticiEkranCikisGeriButon = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         yoneticiEkranTumKullanicilarMenu = new javax.swing.JMenuItem();
@@ -261,13 +262,13 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Hoş geldiniz, bla bla bla...");
+        jLabel1.setText("Hoş geldiniz, Arda Çankaya");
 
-        jLabel2.setText("İsim : bla bla");
+        jLabel2.setText("İsim : Arda");
 
-        jLabel3.setText("Soyisim : bla bla");
+        jLabel3.setText("Soyisim : Çankaya");
 
-        jLabel4.setText("Kullanıcı Adı :");
+        jLabel4.setText("Kullanıcı Adı : veritabani");
 
         yoneticiEkranCikisGeriButon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resimler/exiticon.png_48x48.png"))); // NOI18N
         yoneticiEkranCikisGeriButon.setText("Çıkış Yap");
@@ -276,6 +277,8 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
                 yoneticiEkranCikisGeriButonActionPerformed(evt);
             }
         });
+
+        jLabel7.setText("Şifre : veritabani");
 
         jMenu1.setText("Listele");
 
@@ -317,9 +320,10 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)
-                        .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel7))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
                 .addComponent(yoneticiEkranCikisGeriButon)
                 .addContainerGap())
         );
@@ -339,7 +343,9 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         pack();
@@ -366,13 +372,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
         
         IzinIstek eskiIzinleriListeleyici=new IzinIstek();
         
-        /*
-        ArrayList<String> filtreler=new ArrayList<String>();
-        
-        if(yoneticiEkranEskiizinlerDialogIzinYillikFiltre.isSelected())
-            filtreler.add(yoneticiEkranEskiizinlerDialogIzinYillikFiltre.getText());
-        
-        */
+       //filtresiz bi şekilde tüm eski izinleri(onay ya da red olan) çek.
         
         model=eskiIzinleriListeleyici.eskiIzinleriListele();
         yoneticiEkranEskiizinlerDialogizinTablo.setModel(model);
@@ -426,7 +426,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
             IzinIstek izinOnayi=new IzinIstek();
             durum=izinOnayi.istegiOnayla(gidenIstekNo);
             if(durum)
-                JOptionPane.showConfirmDialog(this, "Seçim onaylandı.","onay",JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(this, "İstek onaylandı.","İşlem başarılı",JOptionPane.OK_OPTION);
             else
                 JOptionPane.showConfirmDialog(rootPane, "Hata, kontrol edin.");
                 
@@ -445,9 +445,9 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
             IzinIstek izinRed=new IzinIstek();
             durum=izinRed.istegiReddet(gidenIstekNo);
             if(durum)
-                JOptionPane.showConfirmDialog(this, "Seçim onaylandı.","onay",JOptionPane.OK_OPTION);
+                JOptionPane.showMessageDialog(this, "İstek reddedildi.","İşlem başarılı",JOptionPane.OK_OPTION);
             else
-                JOptionPane.showConfirmDialog(rootPane, "Hata, kontrol edin.");
+                JOptionPane.showMessageDialog(rootPane, "Hata, kontrol edin.");
                 
         }
     }//GEN-LAST:event_yoneticiEkranIzinistekleriReddetButonActionPerformed
@@ -526,6 +526,7 @@ public class YoneticiEkran6 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;

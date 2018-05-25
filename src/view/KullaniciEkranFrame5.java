@@ -137,6 +137,10 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
             }
         });
 
+        izinIstekBaslangicDateChooser.setBackground(new java.awt.Color(0, 153, 102));
+
+        izinIstekBitisDateChooser.setAutoscrolls(true);
+
         izinTurYillik.setText("Yıllık");
         izinTurYillik.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -602,17 +606,17 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
         
         if(durum)
         {
-           JOptionPane.showMessageDialog(rootPane, "Bilgileriniz başarıyla güncellendi..");
+           JOptionPane.showMessageDialog(this, "Bilgileriniz başarıyla güncellendi..","Mesaj",JOptionPane.OK_OPTION);
             anasayfaBilgileriniGetir();
             kullaniciEkranBilgilerimiGuncelleDialog.setVisible(false);
             
         }
         else
         {
-             JOptionPane.showMessageDialog(rootPane, "Hata ! Lütfen bilgilerinizi kontrol edin.");
+             JOptionPane.showMessageDialog(this, "Hata ! Lütfen bilgilerinizi kontrol edin.","Hata",JOptionPane.OK_OPTION);
         }
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(rootPane, "Hata ! Lütfen bilgilerinizi kontrol edin.");
+        JOptionPane.showMessageDialog(this, "Hata ! Lütfen bilgilerinizi kontrol edin.","Hata",JOptionPane.OK_OPTION);
     }
         
         
@@ -691,12 +695,12 @@ public class KullaniciEkranFrame5 extends javax.swing.JFrame {
         durum=izinIstek.izinIstegiOlustur(izinIstek);
         if(durum)
         {
-            JOptionPane.showMessageDialog(rootPane, "İzin isteğiniz oluşturuldu, yönetici tarafında onay bekliyor.");
+            JOptionPane.showMessageDialog(rootPane,"İzin isteğiniz oluşturuldu, yönetici tarafından onay bekliyor.");
             KullaniciEkranIzinIstegiYapDialog.setVisible(false);
             
         }
         else
-            JOptionPane.showMessageDialog(rootPane, "Hata,bilgilerinizi kontrol edin.");
+            JOptionPane.showMessageDialog(this, "Hata,bilgilerinizi kontrol edin.","Hata",JOptionPane.OK_OPTION);
         
          
     }

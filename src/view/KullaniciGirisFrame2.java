@@ -37,9 +37,9 @@ public class KullaniciGirisFrame2 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         kullaniciGiris2KullaniciAditxt = new javax.swing.JTextField();
-        kullaniciGiris2Sifretxt = new javax.swing.JTextField();
         kullaniciGiris2GirisYapButon = new javax.swing.JButton();
         kullaniciGirisGeriButon = new javax.swing.JButton();
+        kullaniciGiris2Sifretxt = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +72,7 @@ public class KullaniciGirisFrame2 extends javax.swing.JFrame {
                 .addComponent(kullaniciGirisGeriButon)
                 .addGap(76, 76, 76)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,8 +82,8 @@ public class KullaniciGirisFrame2 extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(kullaniciGiris2KullaniciAditxt)
-                            .addComponent(kullaniciGiris2Sifretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(kullaniciGiris2KullaniciAditxt, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                            .addComponent(kullaniciGiris2Sifretxt))
                         .addGap(71, 71, 71))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(kullaniciGiris2GirisYapButon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -101,11 +101,15 @@ public class KullaniciGirisFrame2 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(kullaniciGiris2KullaniciAditxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(kullaniciGiris2Sifretxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel2)
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kullaniciGiris2Sifretxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
                 .addComponent(kullaniciGiris2GirisYapButon)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
@@ -130,7 +134,7 @@ public class KullaniciGirisFrame2 extends javax.swing.JFrame {
         setVisible(false);
         }
         else
-            JOptionPane.showMessageDialog(rootPane, "Kullanıcı adı veya şifre yanlış");
+            JOptionPane.showMessageDialog(this, "Kullanıcı adı veya şifre yanlış","Mesaj",JOptionPane.OK_OPTION);
         } catch (SQLException ex) {
             Logger.getLogger(KullaniciGirisFrame2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -186,7 +190,7 @@ public class KullaniciGirisFrame2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton kullaniciGiris2GirisYapButon;
     private javax.swing.JTextField kullaniciGiris2KullaniciAditxt;
-    private javax.swing.JTextField kullaniciGiris2Sifretxt;
+    private javax.swing.JPasswordField kullaniciGiris2Sifretxt;
     private javax.swing.JButton kullaniciGirisGeriButon;
     // End of variables declaration//GEN-END:variables
 }
